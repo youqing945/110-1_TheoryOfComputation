@@ -14,27 +14,27 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2", "trystate"],
+    states=["user", "sShopee", "sFortune", "sCat"],
     transitions=[
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
+            "dest": "sShopee",
+            "conditions": "is_going_to_sShopee",
         },
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
+            "dest": "sFortune",
+            "conditions": "is_going_to_sFortune",
         },
         {
             "trigger": "advance",
             "source": "user",
-            "dest": "trystate",
-            "conditions": "is_going_to_trystate",
+            "dest": "sCat",
+            "conditions": "is_going_to_sCat",
         },
-        {"trigger": "go_back", "source": ["state1", "state2", "trystate"], "dest": "user"},
+        {"trigger": "go_back", "source": ["sShopee", "sFortune", "sCat"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -110,7 +110,8 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            send_text_message(event.reply_token, "Not Entering any State")
+            mes = "抱歉看不懂，作者在混\n以下指令我能看懂：\n蝦皮評論\n此刻運勢\n可愛貓貓"
+            send_text_message(event.reply_token, mes)
 
     return "OK"
 
