@@ -8,7 +8,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
 from fsm import TocMachine
-from utils import send_text_message
+from utils import add_image, add_text, get_random_google_image, send_all_message, send_text_message
 
 load_dotenv()
 
@@ -110,8 +110,9 @@ def webhook_handler():
         print(f"REQUEST BODY: \n{body}")
         response = machine.advance(event)
         if response == False:
-            mes = "抱歉看不懂，作者在混\n以下指令我能看懂：\n蝦皮評論\n此刻運勢\n可愛貓貓"
-            send_text_message(event.reply_token, mes)
+            mes = [add_text(str("正在Google搜尋以「" + event.message.text + "」為關鍵字圖片：")),
+                    add_image(get_random_google_image(event.message.text))]
+            send_all_message(event.reply_token, mes)
 
     return "OK"
 
