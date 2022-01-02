@@ -1,5 +1,13 @@
 # 計理作業 Line Bot
 
+加入此聊天機器人：
+
+<img src="./img/644bohuz.png" style="zoom:40%" />
+
+
+
+---
+
 一個有以下功能的聊天機器人（非常的雜）：
 
 * 蝦皮評論：生成蝦皮評論用模板，包含文字跟圖片，複製貼上就不用拍跟想了
@@ -13,15 +21,57 @@
 
 ### 使用ngrok
 
+1. 執行app.py
+
+	在app.py的目錄下執行
+
+	```console
+	python app.py
+	```
+2. 執行ngrok
+
+	在有ngrok執行檔的目錄下執行
+	沒有token的話要登入拿
+
+	```console
+	./ngrok authtoken <token>
+	```
+	```console
+	./ngrok http 8000
+	```
+3. 得到Forwarding網址
+
+	例：https://b391-61-70-50-24.ngrok.io
+
 **聊天機器人**
 
+1. 在Messaging API>Webhook settings>Webhook URL把剛剛的Forwarding網址貼上並加上結尾"/webhook"
+
+	例：https://b391-61-70-50-24.ngrok.io/webhook
+
+2. 打開Use webhook
+
+3. 點Webhook URL下的Verify（此時app.py與ngrok皆還在執行），若成功會顯示Success，app.py的Terminal也會開始接收訊息
+
+4. 成功啟用。執行期間每有檔案變更存檔皆會更新。
+
 **FSM Diagram生成**
+
+1. 在網址列貼上剛剛的Forwarding網址，結尾加上"/show-fsm"
+
+	例：https://b391-61-70-50-24.ngrok.io/show-fsm
+
+2. 前往該網址，即可得FSM Diagram
 
 ### 使用Heroku
 
 還沒研究但我相信demo前弄得出來(
 
+對目前只在ngrok上跑過QQ
 
+## 部分研究資料
+
+來不及放了啊啊啊
 
 ---
 Template: https://github.com/NCKU-CCS/TOC-Project-2020
